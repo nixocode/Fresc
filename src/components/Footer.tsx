@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './Footer.module.css';
+import Logo from './Logo';
 
 export default function Footer() {
     return (
@@ -8,12 +9,7 @@ export default function Footer() {
                 <div className={styles.top}>
                     <div className={styles.brand}>
                         <Link href="/" className={styles.logo}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src="/logo.png"
-                                alt="Fresc"
-                                className={styles.logoImg}
-                            />
+                            <Logo height={36} inverted />
                         </Link>
                         <p className={styles.tagline}>
                             Fresh produce at discounted prices from local fruit shops near you.

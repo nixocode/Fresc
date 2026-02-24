@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Header.module.css';
+import Logo from './Logo';
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -22,12 +23,7 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        src="/logo.png"
-                        alt="Fresc"
-                        className={styles.logoImg}
-                    />
+                    <Logo height={48} />
                 </Link>
 
                 <nav className={styles.nav}>
