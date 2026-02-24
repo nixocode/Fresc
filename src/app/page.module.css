@@ -415,39 +415,117 @@
 }
 
 /* ========================================
-   FOR SHOPS FEATURES
+   FOR SHOPS — EXPANDED SECTION
    ======================================== */
 
-.features {
+/* 3-column feature cards */
+.shopCards {
   display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 1.25rem 3.5rem;
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.shopCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all var(--transition-bounce);
+}
+
+.shopCard:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.shopCardIcon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.shopCard h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+}
+
+.shopCard p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* Horizontal onboarding steps */
+.shopSteps {
+  text-align: center;
   margin-bottom: 3rem;
   position: relative;
   z-index: 2;
 }
 
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  font-size: 1.0625rem;
-  color: #FFFFFF;
-  font-weight: 600;
+.shopStepsTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
 }
 
-.check {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
+.shopStepsRow {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1.25rem;
+}
+
+.shopStep {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.shopStepNum {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
   font-size: 0.875rem;
   flex-shrink: 0;
+}
+
+.shopStepArrow {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.25rem;
+}
+
+/* CTA area */
+.shopCta {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.shopCtaNote {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
 }
 
 /* ========================================
@@ -609,9 +687,19 @@
     padding: 3.5rem 0;
   }
 
-  .features {
+  /* Shop section responsive */
+  .shopCards {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .shopStepsRow {
+    flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .shopStepArrow {
+    transform: rotate(90deg);
   }
 
   .stats {

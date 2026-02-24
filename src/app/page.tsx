@@ -142,35 +142,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* For Shops — gradient fade in/out */}
+      {/* For Shops — expanded with more clarity */}
       <section id="for-shops" className={styles.sectionGreen}>
-        <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>For shop owners 🏪</h2>
+        <div className={styles.container} style={{ maxWidth: '960px' }}>
+          <h2 className={styles.sectionTitle}>Partner with Fresc 🏪</h2>
           <p className={styles.sectionDescription}>
-            Turn surplus produce into new customers
+            Turn end-of-day surplus into revenue — and reach new customers in your neighborhood
           </p>
-          <div className={styles.features}>
-            <div className={styles.feature}>
-              <span className={styles.check}>✓</span>
-              <span>Free 30-day trial</span>
+
+          {/* Value prop cards */}
+          <div className={styles.shopCards}>
+            <div className={styles.shopCard}>
+              <span className={styles.shopCardIcon}>📦</span>
+              <h3>Reduce waste</h3>
+              <p>List produce that&apos;s nearing its best-by date at a discount instead of throwing it away. Less waste, more sales.</p>
             </div>
-            <div className={styles.feature}>
-              <span className={styles.check}>✓</span>
-              <span>List items in 30 seconds</span>
+            <div className={styles.shopCard}>
+              <span className={styles.shopCardIcon}>📈</span>
+              <h3>Grow your customers</h3>
+              <p>Get discovered by nearby shoppers browsing Fresc. Customers who pick up discounted items often come back for full-price shopping too.</p>
             </div>
-            <div className={styles.feature}>
-              <span className={styles.check}>✓</span>
-              <span>Real-time analytics</span>
-            </div>
-            <div className={styles.feature}>
-              <span className={styles.check}>✓</span>
-              <span>Notify your followers</span>
+            <div className={styles.shopCard}>
+              <span className={styles.shopCardIcon}>⚡</span>
+              <h3>Stay in control</h3>
+              <p>Set your own prices and availability. List items in under 30 seconds with our simple dashboard. Real-time analytics show what sells.</p>
             </div>
           </div>
-          <div style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
-            <a href="#contact" className="btn btn-primary" style={{ background: '#FFFFFF', color: 'var(--color-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
-              Register your shop →
+
+          {/* How it works for shops */}
+          <div className={styles.shopSteps}>
+            <h3 className={styles.shopStepsTitle}>Getting started is easy</h3>
+            <div className={styles.shopStepsRow}>
+              <div className={styles.shopStep}>
+                <span className={styles.shopStepNum}>1</span>
+                <span>Sign up free</span>
+              </div>
+              <span className={styles.shopStepArrow}>→</span>
+              <div className={styles.shopStep}>
+                <span className={styles.shopStepNum}>2</span>
+                <span>List surplus items</span>
+              </div>
+              <span className={styles.shopStepArrow}>→</span>
+              <div className={styles.shopStep}>
+                <span className={styles.shopStepNum}>3</span>
+                <span>Customers collect</span>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA area */}
+          <div className={styles.shopCta}>
+            <a href="#contact" className="btn btn-primary" style={{ background: '#FFFFFF', color: 'var(--color-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.15)', fontSize: '1.05rem', padding: '1rem 2.25rem' }}>
+              Register your shop — it&apos;s free →
             </a>
+            <p className={styles.shopCtaNote}>
+              Free 30-day trial · No commission on first 50 orders · Cancel anytime
+            </p>
           </div>
         </div>
       </section>
