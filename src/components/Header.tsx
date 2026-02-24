@@ -7,6 +7,17 @@ import styles from './Header.module.css';
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
 
+    const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+        e.preventDefault();
+        const el = document.getElementById(id);
+        if (el) {
+            const offset = 52 + 20; // header height + padding
+            const top = el.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+        setMenuOpen(false);
+    };
+
     return (
         <header className={styles.header}>
             <div className={styles.container}>
@@ -20,15 +31,15 @@ export default function Header() {
                 </Link>
 
                 <nav className={styles.nav}>
-                    <Link href="#how-it-works" className={styles.navLink}>
+                    <a href="#how-it-works" className={styles.navLink} onClick={(e) => scrollTo(e, 'how-it-works')}>
                         How it works
-                    </Link>
-                    <Link href="#for-shops" className={styles.navLink}>
+                    </a>
+                    <a href="#for-shops" className={styles.navLink} onClick={(e) => scrollTo(e, 'for-shops')}>
                         For shops
-                    </Link>
-                    <Link href="#download" className={styles.ctaLink}>
+                    </a>
+                    <a href="#download" className={styles.ctaLink} onClick={(e) => scrollTo(e, 'download')}>
                         Download
-                    </Link>
+                    </a>
                 </nav>
 
                 <button
@@ -41,27 +52,27 @@ export default function Header() {
 
                 {menuOpen && (
                     <div className={styles.mobileMenu}>
-                        <Link
+                        <a
                             href="#how-it-works"
                             className={styles.mobileLink}
-                            onClick={() => setMenuOpen(false)}
+                            onClick={(e) => scrollTo(e, 'how-it-works')}
                         >
                             How it works
-                        </Link>
-                        <Link
+                        </a>
+                        <a
                             href="#for-shops"
                             className={styles.mobileLink}
-                            onClick={() => setMenuOpen(false)}
+                            onClick={(e) => scrollTo(e, 'for-shops')}
                         >
                             For shops
-                        </Link>
-                        <Link
+                        </a>
+                        <a
                             href="#download"
                             className={styles.mobileLink}
-                            onClick={() => setMenuOpen(false)}
+                            onClick={(e) => scrollTo(e, 'download')}
                         >
                             Download
-                        </Link>
+                        </a>
                     </div>
                 )}
             </div>

@@ -1,10 +1,42 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
 import styles from './page.module.css';
+import FAQ from '@/components/FAQ';
 
 export default function Home() {
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const pathRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.visible);
+            // Also activate the connecting path when any step appears
+            if (pathRef.current) {
+              pathRef.current.classList.add(styles.pathActive);
+            }
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const steps = stepsRef.current?.querySelectorAll(`.${styles.step}`);
+    steps?.forEach((step) => observer.observe(step));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
       <section className={styles.hero}>
+        <div className={styles.heroBlob1} />
+        <div className={styles.heroBlob2} />
+
         <div className={styles.container}>
           <h1 className={styles.title}>
             <span className={styles.highlight}>Fresh</span> produce.
@@ -17,7 +49,7 @@ export default function Home() {
           </p>
           <div className={styles.buttons}>
             <a href="#download" className="btn btn-primary">
-              Download the app
+              🍓 Download the app
             </a>
             <a href="#how-it-works" className="btn btn-secondary">
               See how it works
@@ -26,31 +58,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className={styles.section}>
-        <div className={styles.container} style={{ maxWidth: '900px' }}>
+      {/* Benefits — seamless fade from hero */}
+      <section className={styles.sectionBenefits}>
+        <div className={styles.container} style={{ maxWidth: '960px' }}>
+          <h2 className={styles.sectionTitle}>Why people love Fresc</h2>
+          <p className={styles.sectionDescription}>
+            Fresh savings, delivered with a smile 🍊
+          </p>
           <div className={styles.benefitsGrid}>
             <div className={styles.benefit}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/icon-savings.png" alt="Save money" className={styles.benefitImg} />
+              <div className={`${styles.benefitIconWrap} ${styles.benefitIconGreen}`}>
+                <span className={styles.benefitEmoji}>💰</span>
+              </div>
               <h4>Save up to 50%</h4>
               <p>Real discounts on fresh produce</p>
             </div>
             <div className={styles.benefit}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/icon-fresh.png" alt="Fresh produce" className={styles.benefitImg} />
+              <div className={`${styles.benefitIconWrap} ${styles.benefitIconRed}`}>
+                <span className={styles.benefitEmoji}>🍓</span>
+              </div>
               <h4>Always fresh</h4>
               <p>Quality guaranteed by local shops</p>
             </div>
             <div className={styles.benefit}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/icon-location.png" alt="Nearby shops" className={styles.benefitImg} />
+              <div className={`${styles.benefitIconWrap} ${styles.benefitIconYellow}`}>
+                <span className={styles.benefitEmoji}>📍</span>
+              </div>
               <h4>Walk to collect</h4>
               <p>All shops within minutes away</p>
             </div>
             <div className={styles.benefit}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/icon-eco.png" alt="Eco friendly" className={styles.benefitImg} />
+              <div className={`${styles.benefitIconWrap} ${styles.benefitIconBlue}`}>
+                <span className={styles.benefitEmoji}>🌱</span>
+              </div>
               <h4>Zero waste</h4>
               <p>Help reduce food waste locally</p>
             </div>
@@ -58,37 +98,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How it Works */}
-      <section id="how-it-works" className={styles.sectionAlt}>
-        <div className={styles.container} style={{ maxWidth: '900px' }}>
+      {/* How it Works — Redesigned horizontal walkthrough */}
+      <section id="how-it-works" className={styles.sectionSteps}>
+        <div className={styles.stepsOuter}>
           <h2 className={styles.sectionTitle}>How it works</h2>
           <p className={styles.sectionDescription}>
-            Finding fresh deals is simple
+            Three easy steps to fresh savings 🥳
           </p>
-          <div className={styles.grid}>
-            <div className={styles.card}>
-              <div className={styles.cardNumber}>1</div>
-              <h3>Browse deals</h3>
-              <p>See discounted items from fruit shops within walking distance of you.</p>
+          <div className={styles.stepsRow} ref={stepsRef}>
+            {/* Connecting dotted path */}
+            <div className={styles.stepsPath}>
+              <div className={styles.stepsPathTrack} />
+              <div className={styles.stepsPathFill} ref={pathRef} />
             </div>
-            <div className={styles.card}>
-              <div className={styles.cardNumber}>2</div>
-              <h3>Follow shops</h3>
-              <p>Get notified when your favorite local shops post new offers.</p>
+
+            <div className={styles.step}>
+              <div className={styles.stepNumber}>1</div>
+              <div className={styles.stepBody}>
+                <span className={styles.stepEmoji}>🔍</span>
+                <h3>Browse deals</h3>
+                <p>Open the app and see discounted items from fruit shops within walking distance.</p>
+              </div>
             </div>
-            <div className={styles.card}>
-              <div className={styles.cardNumber}>3</div>
-              <h3>Collect fresh</h3>
-              <p>Pick up your fresh produce at the discounted price. Simple.</p>
+
+            <div className={styles.step}>
+              <div className={styles.stepNumber}>2</div>
+              <div className={styles.stepBody}>
+                <span className={styles.stepEmoji}>❤️</span>
+                <h3>Follow shops</h3>
+                <p>Save your favorites and get notified when they post fresh new offers.</p>
+              </div>
+            </div>
+
+            <div className={styles.step}>
+              <div className={styles.stepNumber}>3</div>
+              <div className={styles.stepBody}>
+                <span className={styles.stepEmoji}>🛒</span>
+                <h3>Collect fresh</h3>
+                <p>Walk to the shop and pick up your fresh produce at the discounted price. Easy!</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* For Shops */}
+      {/* For Shops — gradient fade in/out */}
       <section id="for-shops" className={styles.sectionGreen}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>For shop owners</h2>
+          <h2 className={styles.sectionTitle}>For shop owners 🏪</h2>
           <p className={styles.sectionDescription}>
             Turn surplus produce into new customers
           </p>
@@ -110,18 +167,21 @@ export default function Home() {
               <span>Notify your followers</span>
             </div>
           </div>
-          <div style={{ textAlign: 'center' }}>
-            <a href="#contact" className="btn btn-primary">
-              Register your shop
+          <div style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
+            <a href="#contact" className="btn btn-primary" style={{ background: '#FFFFFF', color: 'var(--color-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
+              Register your shop →
             </a>
           </div>
         </div>
       </section>
 
-      {/* Download */}
-      <section id="download" className={styles.section}>
+      {/* FAQ */}
+      <FAQ />
+
+      {/* Download — fades into footer */}
+      <section id="download" className={styles.sectionDownload}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Get Fresc</h2>
+          <h2 className={styles.sectionTitle}>Get Fresc 🍓</h2>
           <p className={styles.sectionDescription}>
             Download free and start saving today
           </p>
@@ -146,7 +206,7 @@ export default function Home() {
             </a>
           </div>
           <p className={styles.note}>
-            Now available in Sant Antoni, Barcelona. More neighborhoods coming soon.
+            Now available in Sant Antoni, Barcelona 🇪🇸 More neighborhoods coming soon.
           </p>
 
           {/* Stats */}
